@@ -19,7 +19,7 @@ col1,col2 = st.columns(2)
 with col1:
     st.markdown(f"""
                 <div> 
-                        <h4 style="color:#7133FF;font-size:32px" >Do fun math with pricess LAM!!
+                        <h4 style="color:#7133FF;font-size:32px" >Do fun math with me!!
                         </div>""", unsafe_allow_html=True) 
 with col2:
     st.image('app/data/lam.png',width=160)

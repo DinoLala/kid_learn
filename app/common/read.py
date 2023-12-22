@@ -5,7 +5,7 @@ import time
 
 fruit_list=['apple','strawberry','banana','pineapple','pumkin','grape']
 
-animal_list=['dog','cat','cow','flamingo','unicorn']
+animal_list=['dog','cat','cow','flamingo','unicorn','pig','elephant','lion','giraffe','squirrel']
 
 color_dict={'apple':'red'
             ,'strawberry':'red'
@@ -31,7 +31,14 @@ eat_dict={'dog':['eats','bone'],
           'cat':['drinks','milk']
           ,'cow':['eats','grass']
           ,'flamingo':['eats','small fish']
-          ,'unicorn':['eats','ice cream']
+          ,'unicorn':['likes','ice cream']
+          ,'pig':['likes','tomato']
+          ,'elephant':['likes','banana']
+          ,'lion':['eats','meat']
+          ,'giraffe':['eats','leaf']
+          ,'squirrel':['eats','nuts']
+          ,'bear':['likes','honney']
+ 
             }
 
 

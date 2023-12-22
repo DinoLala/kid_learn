@@ -102,11 +102,11 @@ if st.session_state['button'] == True:
     text = f"Answer is: {ans}"
     p.write(text, end="\r")
 
-    time.sleep(5)
+    time.sleep(3)
     
     p.write("")
 
-    time.sleep(2.5)
+    # time.sleep(2.5)
     # st.write("Your Answer is: ",  ans)
     # st.markdown(f"""<div> 
     #                     <h4 style="color:#FF5733;font-size:32px" >Answer is: {ans}

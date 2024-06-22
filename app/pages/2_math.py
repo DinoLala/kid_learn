@@ -10,8 +10,8 @@ import time
 import requests
 
 st.set_page_config(layout="wide")
-max1=int(st.sidebar.number_input('max_1',max_value=100.0,value=5.0,step=1.0 )  )
-max2=int(st.sidebar.number_input('max_2',max_value=100.0,value=5.0,step=1.0 )  )
+max1=int(st.sidebar.number_input('max_1',max_value=100.0,value=10.0,step=1.0 )  )
+max2=int(st.sidebar.number_input('max_2',max_value=100.0,value=10.0,step=1.0 )  )
 
 # st.header(':orange[Have fun solving puzzles with us !]')
  
@@ -21,6 +21,7 @@ with col1:
                 <div> 
                         <h4 style="color:#7133FF;font-size:32px" >Do fun math with me!!
                         </div>""", unsafe_allow_html=True) 
+    st.image('app/data/heart.png',width=120)
 with col2:
     st.image('app/data/lam.png',width=160)
 st.header('')
@@ -48,11 +49,11 @@ def add_sub(max1,max2):
                                 </div>""", unsafe_allow_html=True) 
 
 
-        r1_str="*" * (r1+r2)
-        # r2_str="*" * r2
+        r1_str="*" * (r1)
+        r2_str="*" * r2
 
         with col2:
-            st.title(f""":orange[{r1_str}] """)
+            st.title(f":orange[{r1_str}]"+' '+ f" :orange[{r2_str}] ")
             # st.markdown(f"""<div> 
             #                     <h4 style="color:#7133FF;font-size:60px" >{r1_str}  {r2_str} 
             #                     </div>""", unsafe_allow_html=True) 

@@ -18,6 +18,8 @@ with col1:
     st.markdown(f"""<div> 
                         <h4 style="color:#7133FF;font-size:32px" >Read and Write with me!!
                         </div>""", unsafe_allow_html=True) 
+    st.image('app/data/heart.png',width=120)
+    
 with col2:
     st.image('app/data/lam.png',width=160)
 st.header('')
@@ -26,19 +28,27 @@ import os
 
 col1,col2 = st.columns(2)
 
-sight_word=['in', 'this','that', 'I', 'we', 'no','yes','on']
+sight_word=['in', 'this','that', 'I', 
+            'we', 'no','yes','on','there','one'
+            ,'two'
+            ,'here'
+            ,'look'
+            ,'like'
+            ,'she','her','he','him','see', 'who','how'
+            , 'where','what','am','up','down','under',]
 
 if 'counter' not in st.session_state: 
     st.session_state.counter = 0
 def showPhoto(photo):
     # col2.image(photo,caption=photo)
-    if st.session_state.counter % 5==0:
+    if st.session_state.counter % 2==0:
         r=random.randint(0, len(sight_word))
         s=sight_word[r]
         with col1:
             st.markdown(f"""<div> 
                         <h4 style="color:#FF5733;font-size:100px" >{s} 
                         </div>""", unsafe_allow_html=True)
+            
 
     else:
         with col2:

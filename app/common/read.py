@@ -5,7 +5,7 @@ import time
 
 fruit_list=['apple','strawberry','banana','pineapple','pumkin','grape']
 
-animal_list=['dog','cat','cow','flamingo','unicorn','pig','elephant','lion','giraffe','squirrel']
+animal_list=['dog','cat','cow','flamingo','unicorn','pig','elephant','lion','giraffe','squirrel','bear']
 
 color_dict={'apple':'red'
             ,'strawberry':'red'
@@ -48,7 +48,8 @@ def get_sentence(st,col1,col2,photo):
     
     word=photo.split('/')[-1].split('.')[0]
     if word in fruit_list:
-        col2.image(photo,caption=photo)
+        col2.image(photo,width=360)
+        col2.write('image source: google image')
         color=color_dict[word]
         taste=taste_dict[word]
 
@@ -72,7 +73,8 @@ def get_sentence(st,col1,col2,photo):
 
 
     elif word in animal_list:
-        col2.image(photo,caption=photo)
+        col2.image(photo,width=360)
+        col2.write('image source: google image')
         # eat_dict[word]
         with col1:
             st.markdown(f"""<div> 

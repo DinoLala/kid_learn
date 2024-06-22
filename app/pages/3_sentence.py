@@ -16,8 +16,9 @@ st.set_page_config(layout="wide")
 col1,col2 = st.columns(2)
 with col1:
     st.markdown(f"""<div> 
-                        <h4 style="color:#7133FF;font-size:32px" >Read with me!!
-                        </div>""", unsafe_allow_html=True) 
+                    <h4 style="color:#FF5733;font-size:32px" >Having fun learning with princess LAM!!
+                    </div>""", unsafe_allow_html=True)
+    st.image('app/data/heart.png',width=120)
 with col2:
     st.image('app/data/lam.png',width=160)
 st.header('')

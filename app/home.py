@@ -65,7 +65,7 @@ if st.session_state.math_answered:
     if st.button("Try Another Math"):
         for key in ["math_question", "math_answer", "math_choices", "math_answered"]:
             st.session_state.pop(key, None)
-        st.experimental_rerun()
+        st.stop()
 
 
 
@@ -128,6 +128,6 @@ if st.session_state.brain_answered:
         st.session_state.brain_options = opts
         st.session_state.brain_answered = False
         st.session_state.brain_user_answer = None
-        st.experimental_rerun()
+        st.stop()
 
 st.image("app/data/happy-dance-excited.gif", width=200)

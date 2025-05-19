@@ -8,8 +8,17 @@ import streamlit as st
 
 # Page config
 st.set_page_config(layout="wide")
-st.header(":orange[Math worksheet!]")
-st.header('')
+st.markdown("""
+<h3 style='color: orange;'>🧠 Welcome to the Math Worksheet Maker! ✏️</h3>
+Create fun and custom math practice worksheets for <b>K–2 kids</b>.
+
+- ✅ Enter your child’s name  
+- ➕ Choose the math operations (add, subtract, multiply, divide)  
+- 🖨️ Generate printable worksheets instantly  
+
+Perfect for learning at <b>home or in the classroom</b>!
+""", unsafe_allow_html=True)
+
 
 # Input UI
 col1, col2, col3 = st.columns(3)

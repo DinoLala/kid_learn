@@ -1,17 +1,9 @@
-import pkgutil
-from importlib import import_module
-import requests
-from bs4 import BeautifulSoup
-import pandas as pd
+import streamlit as st
+import json
 import random
-import streamlit as st
 
-import streamlit as st
+# ---- Title & Welcome ----
 
-
-# st.subheader('For more information, please visit US Chess official website')
-
-# st.header(':orange[Having Fun learning with pricess LAM!!]')
 st.markdown("""
 <h2 style='color: orange;'>🎉 Having Fun Learning with Lam! 🧡</h2>
 
@@ -22,20 +14,16 @@ Let's count, add, subtract — and most of all, enjoy every step of the journey.
 Perfect for curious little minds in **K–2**! 📚👧🧒
 """, unsafe_allow_html=True)
 
-#import streamlit as st
-import random
-import streamlit as st
-import random
+# -------------------- MATH QUESTION --------------------
+st.markdown("<h2 style='color: orange;'>🧮 Daily Math Challenge</h2>", unsafe_allow_html=True)
 
-st.markdown("<h2 style='color: orange;'>🌟 Problem of the Day 🌟</h2>", unsafe_allow_html=True)
-
-# Initialize the problem only once
-if "question" not in st.session_state:
+# Session state for math
+if "math_question" not in st.session_state:
+    
     op = random.choice(['+', '-', '×'])
 
     if op == '+':
-        a = random.randint(1, 50)
-        b = random.randint(1, 50)
+        a, b = random.randint(1, 50), random.randint(1, 50)
         answer = a + b
         question = f"{a} + {b} = ?"
     elif op == '-':
@@ -43,13 +31,12 @@ if "question" not in st.session_state:
         b = random.randint(1, a)
         answer = a - b
         question = f"{a} - {b} = ?"
-    else:  # ×
-        a = random.randint(1, 10)
-        b = random.randint(1, 5)
+    else:
+        a, b = random.randint(1, 10), random.randint(1, 5)
         answer = a * b
         question = f"{a} × {b} = ?"
 
-    # Generate multiple choices
+    # Generate answer choices
     choices = [answer]
     while len(choices) < 4:
         wrong = answer + random.choice([-3, -2, -1, 1, 2, 3])
@@ -57,31 +44,90 @@ if "question" not in st.session_state:
             choices.append(wrong)
     random.shuffle(choices)
 
-    # Store in session state
-    st.session_state.question = question
-    st.session_state.answer = answer
-    st.session_state.choices = choices
-    st.session_state.answered = False
+    # Save to session
+    st.session_state.math_question = question
+    st.session_state.math_answer = answer
+    st.session_state.math_choices = choices
+    st.session_state.math_answered = False
 
-# Show question and choices
-st.markdown(f"<h3>{st.session_state.question}</h3>", unsafe_allow_html=True)
-user_answer = st.radio("Choose your answer:", st.session_state.choices, key="user_choice")
+# Show math question
+st.markdown(f"<h3>{st.session_state.math_question}</h3>", unsafe_allow_html=True)
+user_math_answer = st.radio("Choose your answer:", st.session_state.math_choices, key="math_radio")
 
-# Check answer
-if st.button("Check Answer") and not st.session_state.answered:
-    if user_answer == st.session_state.answer:
+if st.button("Check Math Answer") and not st.session_state.math_answered:
+    st.session_state.math_answered = True
+    if user_math_answer == st.session_state.math_answer:
         st.success("🎉 Yay! That's correct!")
     else:
-        st.error(f"Oops! The correct answer is {st.session_state.answer}.")
-    st.session_state.answered = True
+        st.error(f"Oops! The correct answer is {st.session_state.math_answer}.")
 
-# Allow new question only after answering
-if st.session_state.answered and st.button("Try Another"):
-    for key in ["question", "answer", "choices", "user_choice", "answered"]:
-        if key in st.session_state:
-            del st.session_state[key]
-    st.experimental_rerun()
+if st.session_state.math_answered:
+    if st.button("Try Another Math"):
+        for key in ["math_question", "math_answer", "math_choices", "math_answered"]:
+            st.session_state.pop(key, None)
+        st.experimental_rerun()
 
-# Optional fun image
-# st.image("data/happy-dance-excited.gif", width=200)
-st.image("app/data/happy-dance-excited.gif")
+
+
+# -------------------- BRAIN TEASER --------------------
+st.markdown("<h2 style='color: orange;'>🧠 Problem of the Day - Brain Teaser</h2>", unsafe_allow_html=True)
+
+# Load questions
+@st.cache_data
+def load_brain_questions():
+    with open("app/data/brain_questions.json", "r") as f:
+        return json.load(f)
+
+@st.cache_data
+def load_dummy_wrong_answers():
+    with open("app/data/dummy_wrong_answers.json", "r") as f:
+        return json.load(f)
+
+def generate_wrong_answers(correct, count=3):
+    wrongs = [ans for ans in dummy_wrong_answers if ans != correct]
+    return random.sample(wrongs, count)
+
+def get_new_brain_question():
+    q = random.choice(brain_questions)
+    correct = q["answer"]
+    wrongs = generate_wrong_answers(correct)
+    options = wrongs + [correct]
+    random.shuffle(options)
+    return q["question"], correct, options
+
+# Load data
+brain_questions = load_brain_questions()
+dummy_wrong_answers = load_dummy_wrong_answers()
+
+# Brain teaser session state
+if "brain_question" not in st.session_state:
+    q, a, opts = get_new_brain_question()
+    st.session_state.brain_question = q
+    st.session_state.brain_answer = a
+    st.session_state.brain_options = opts
+    st.session_state.brain_answered = False
+    st.session_state.brain_user_answer = None
+
+# Show question
+st.write(f"**{st.session_state.brain_question}**")
+user_brain_answer = st.radio("Choose your answer:", st.session_state.brain_options, key="brain_radio")
+
+if st.button("Check Brain Answer") and not st.session_state.brain_answered:
+    st.session_state.brain_user_answer = user_brain_answer
+    st.session_state.brain_answered = True
+    if user_brain_answer == st.session_state.brain_answer:
+        st.success("🎉 Correct! You're a thinker!")
+    else:
+        st.error(f"Oops! The correct answer is: {st.session_state.brain_answer}")
+
+if st.session_state.brain_answered:
+    if st.button("Next Brain Teaser"):
+        q, a, opts = get_new_brain_question()
+        st.session_state.brain_question = q
+        st.session_state.brain_answer = a
+        st.session_state.brain_options = opts
+        st.session_state.brain_answered = False
+        st.session_state.brain_user_answer = None
+        st.experimental_rerun()
+
+st.image("app/data/happy-dance-excited.gif", width=200)

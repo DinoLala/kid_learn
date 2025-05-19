@@ -7,9 +7,7 @@ name = "chess fun"
 version = "1.0.0"
 
 description = "A fun page for who love chess"
-authors = [
-  Trang Nguyen <susan2004.nguyen@gmail.com>
-]
+authors = []
 readme = "README.md"
 
 [tool.poetry.dependencies]

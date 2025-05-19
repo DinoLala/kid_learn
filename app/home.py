@@ -12,7 +12,7 @@ import streamlit as st
 
 # st.header(':orange[Having Fun learning with pricess LAM!!]')
 st.markdown(f"""<div> 
-                    <h4 style="color:#FF5733;font-size:32px" >Having Fun learning with princess LAM!!
+                    <h4 style="color:#FF5733;font-size:32px" >Having Fun learning with Lam!!
                     </div>""", unsafe_allow_html=True)   
 # with col2:
 #     st.image('./app/data/nhan.jpeg')

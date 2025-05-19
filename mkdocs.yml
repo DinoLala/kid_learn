@@ -1,6 +1,6 @@
-site_name: chess_fun
+site_name: kid_learn
 
-repo_name: chess_fun
+repo_name: kid-learn
 
 theme:
   name: material

@@ -8,18 +8,21 @@ import streamlit as st
 
 # Page config
 st.set_page_config(layout="wide")
-st.markdown("""
-<h3 style='color: orange;'>🧠 Welcome to the Math Worksheet Maker! ✏️</h3>
-Create fun and custom math practice worksheets for <b>K–2 kids</b>.
+col1, col2 = st.columns(2)
+with col1:
+    st.markdown("""
+    <h3 style='color: orange;'>🧠 Welcome to the Math Worksheet Maker! ✏️</h3>
+    Create fun and custom math practice worksheets for <b>K–2 kids</b>.
 
-- ✅ Enter your child’s name  
-- ➕ Choose the math operations (add, subtract, multiply, divide)  
-- 🖨️ Generate printable worksheets instantly  
+    - ✅ Enter your child’s name  
+    - ➕ Choose the math operations (add, subtract, multiply, divide)  
+    - 🖨️ Generate printable worksheets instantly  
 
-Perfect for learning at <b>home or in the classroom</b>!
-""", unsafe_allow_html=True)
-
-
+    Perfect for learning at <b>home or in the classroom</b>!
+    """, unsafe_allow_html=True)
+with col2:
+    # st.image("app/data/happy-dance-excited.gif")
+    st.image("app/data/heart.png")
 # Input UI
 col1, col2, col3 = st.columns(3)
 with col1:

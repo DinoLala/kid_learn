@@ -141,7 +141,7 @@ def create_math_worksheet_col_form(problems, input_dict):
     c.save()
 
 if submited:
-    st.write(f":orange[Hello {name} ! Here is your worksheet to download:]")
+    
 
     dir = 'worksheet_output/'
     os.makedirs(dir, exist_ok=True)
@@ -157,18 +157,21 @@ if submited:
         'min_number': int(min_number),
         'max_number': int(max_number)
     }
-
-    if output_form == 'Row':
-        problems = generate_math_problems_row_form(input_dict)
-        create_worksheet_row_form(problems, input_dict)
+    if int(max_number) < int(min_number):
+        st.write(':orange[Ensure that min < max for valid input.]')
     else:
-        problems = generate_problems_col_form(input_dict)
-        create_math_worksheet_col_form(problems, input_dict)
+        st.write(f":orange[Hello {name} ! Here is your worksheet to download:]")
+        if output_form == 'Row':
+            problems = generate_math_problems_row_form(input_dict)
+            create_worksheet_row_form(problems, input_dict)
+        else:
+            problems = generate_problems_col_form(input_dict)
+            create_math_worksheet_col_form(problems, input_dict)
 
-    with open(filename, "rb") as pdf_file:
-        st.download_button(
-            label="📥 Download Worksheet PDF",
-            data=pdf_file.read(),
-            file_name=f"{name}_worksheet.pdf",
-            mime="application/pdf"
-        )
+        with open(filename, "rb") as pdf_file:
+            st.download_button(
+                label="📥 Download Worksheet PDF",
+                data=pdf_file.read(),
+                file_name=f"{name}_worksheet.pdf",
+                mime="application/pdf"
+            )

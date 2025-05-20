@@ -92,6 +92,10 @@ def create_worksheet_row_form(problems, input_dict):
             if idx < len(problems):
                 x = margin_left + col * column_width
                 c.drawString(x, y, problems[idx])
+    # After drawing all tracing rows
+    c.setFont("Helvetica-Bold", 24)
+    c.setFillColorRGB(0.2, 0.6, 0.2)  # a nice green color
+    c.drawCentredString(width / 2, 40, "🌟 Great job, you did it! 🌟")
 
     c.save()
 
@@ -140,6 +144,10 @@ def create_math_worksheet_col_form(problems, input_dict):
         c.drawString(x + 10, y - 20, op)
         c.drawRightString(x + 90, y - 20, f"{b}")
         c.line(x + 10, y - 45, x + 100, y - 45)
+    # After drawing all tracing rows
+    c.setFont("Helvetica-Bold", 24)
+    c.setFillColorRGB(0.2, 0.6, 0.2)  # a nice green color
+    c.drawCentredString(width / 2, 40, "🌟 Great job, you did it! 🌟")
 
     c.save()
 

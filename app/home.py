@@ -68,7 +68,7 @@ def reset_math():
     for k in keys:
         if k in st.session_state:
             del st.session_state[k]
-    st.experimental_rerun()
+    st.stop()
 
 # ---------- Brain Teaser ----------
 def init_brain():

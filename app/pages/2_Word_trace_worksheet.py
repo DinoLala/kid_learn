@@ -122,7 +122,12 @@ if st.button("Generate Tracing Worksheet"):
             c.setFont(font_name, word_font_size)
             word_spacing = 1.5 * inch
             
-            if len(word) > 5:
+            if len(word) > 8:
+                word_count =2
+                for i in range(word_count):
+                    x = margin + i * word_spacing*1.5
+                    c.drawString(x, y, word)
+            elif len(word) > 5:
                 word_count =3
                 for i in range(word_count):
                     x = margin + i * word_spacing*1.5

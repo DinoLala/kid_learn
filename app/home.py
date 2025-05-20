@@ -3,7 +3,6 @@ import json
 import random
 
 # ---- Title & Welcome ----
-
 st.markdown("""
 <h2 style='color: orange;'>🎉 Having Fun Learning with Lam! 🧡</h2>
 
@@ -14,11 +13,7 @@ Let's count, add, subtract — and most of all, enjoy every step of the journey.
 Perfect for curious little minds in **K–2**! 📚👧🧒
 """, unsafe_allow_html=True)
 
-import streamlit as st
-import random
-import json
-
-# ---------- Load Brain Teasers and Dummy Answers ----------
+# ---------- Load Brain Teasers ----------
 @st.cache_data
 def load_brain_questions():
     with open("app/data/brain_questions.json", "r") as f:
@@ -66,9 +61,7 @@ def init_math():
 def reset_math():
     keys = ["math_question", "math_answer", "math_choices", "math_answered", "math_user_choice"]
     for k in keys:
-        if k in st.session_state:
-            del st.session_state[k]
-    st.experimental_rerun()
+        st.session_state.pop(k, None)
 
 # ---------- Brain Teaser ----------
 def init_brain():
@@ -81,21 +74,15 @@ def init_brain():
 def reset_brain():
     for key in ["brain_question", "brain_answer", "brain_answered"]:
         st.session_state.pop(key, None)
-    st.experimental_rerun()
-
-
 
 # ---------- Main UI ----------
-# st.title("🧡 Having Fun Learning with Lam! 🧡")
-
-# Math Section
 st.markdown("## 🧮 Math Problem of the Day")
 init_math()
 st.write(f"**{st.session_state.math_question}**")
 
 math_answer = st.radio("Choose your answer:", st.session_state.math_choices, key="math_radio")
 
-if st.button("Check Math Answer") and not st.session_state.math_answered:
+if st.button("Check Math Answer", key="check_math") and not st.session_state.math_answered:
     st.session_state.math_user_choice = math_answer
     st.session_state.math_answered = True
     if math_answer == st.session_state.math_answer:
@@ -104,21 +91,20 @@ if st.button("Check Math Answer") and not st.session_state.math_answered:
         st.error(f"Oops! The correct answer is {st.session_state.math_answer}.")
 
 if st.session_state.math_answered:
-    if st.button("Try Another Math Problem"):
+    if st.button("Try Another Math Problem", key="try_another_math"):
         reset_math()
 
 st.markdown("---")
 
-# Brain Teaser Section (no multiple choice, just question and show answer)
 st.markdown("## 🧠 Brain Teaser of the Day")
 init_brain()
 st.write(f"**{st.session_state.brain_question}**")
 
 if not st.session_state.brain_answered:
-    if st.button("Show Answer"):
+    if st.button("Show Answer", key="show_answer_brain"):
         st.session_state.brain_answered = True
 
 if st.session_state.brain_answered:
     st.success(f"Answer: {st.session_state.brain_answer}")
-    if st.button("Next Brain Teaser"):
+    if st.button("Next Brain Teaser", key="next_brain_teaser"):
         reset_brain()

@@ -68,7 +68,7 @@ def reset_math():
     for k in keys:
         if k in st.session_state:
             del st.session_state[k]
-    st.stop()
+    st.experimental_rerun()
 
 # ---------- Brain Teaser ----------
 def init_brain():
@@ -79,11 +79,11 @@ def init_brain():
         st.session_state.brain_answered = False
 
 def reset_brain():
-    keys = ["brain_question", "brain_answer", "brain_answered"]
-    for k in keys:
-        if k in st.session_state:
-            del st.session_state[k]
+    for key in ["brain_question", "brain_answer", "brain_answered"]:
+        st.session_state.pop(key, None)
     st.experimental_rerun()
+
+
 
 # ---------- Main UI ----------
 # st.title("🧡 Having Fun Learning with Lam! 🧡")

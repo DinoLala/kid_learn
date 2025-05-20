@@ -108,3 +108,6 @@ if st.session_state.brain_answered:
     st.success(f"Answer: {st.session_state.brain_answer}")
     if st.button("Next Brain Teaser", key="next_brain_teaser"):
         reset_brain()
+st.markdown("---")       
+st.markdown("© 2025 Dinolala. All rights reserved.")
+st.markdown("**Disclaimer:** Please use this app at your own risk.")

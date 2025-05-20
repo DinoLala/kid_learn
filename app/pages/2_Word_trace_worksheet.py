@@ -3,17 +3,14 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.lib.units import inch
+from reportlab.lib import colors
 from io import BytesIO
 import os
-from reportlab.lib.pagesizes import letter
-from reportlab.pdfgen import canvas
-from reportlab.lib.units import inch
-from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.lib import colors
 import math
 import json
 import random
+
 # Page setup
 st.set_page_config(page_title="Word Tracing Worksheet", layout="centered")
 st.markdown("""

@@ -129,32 +129,36 @@ def generate_problems_col_form(input_dict):
 def create_math_worksheet_col_form( input_dict):
     problems=generate_problems_col_form(input_dict)
     c = canvas.Canvas(input_dict['filename'], pagesize=letter)
+
     width, height = letter
+    for _ in range(worksheet_number):
+        problems=generate_problems_col_form(input_dict)
 
-    c.setFont("Helvetica-Bold", 16)
-    c.drawCentredString(width / 2, height - 40, input_dict['title'])
-    c.setFont("Helvetica", 12)
-    c.drawString(50, height - 70, f"Date: {datetime.today().strftime('%B %d, %Y')}")
+        c.setFont("Helvetica-Bold", 16)
+        c.drawCentredString(width / 2, height - 40, input_dict['title'])
+        c.setFont("Helvetica", 12)
+        c.drawString(50, height - 70, f"Date: {datetime.today().strftime('%B %d, %Y')}")
 
-    margin_x, margin_top = 30, 120
-    col_width = (width - 2 * margin_x) / 4
-    row_height = 125
-    c.setFont("Helvetica", 14)
+        margin_x, margin_top = 30, 120
+        col_width = (width - 2 * margin_x) / 4
+        row_height = 125
+        c.setFont("Helvetica", 14)
 
-    for i, (a, op, b) in enumerate(problems):
-        col = i % 4
-        row = i // 4
-        x = margin_x + col * col_width
-        y = height - margin_top - row * row_height
+        for i, (a, op, b) in enumerate(problems):
+            col = i % 4
+            row = i // 4
+            x = margin_x + col * col_width
+            y = height - margin_top - row * row_height
 
-        c.drawRightString(x + 90, y, f"{a}")
-        c.drawString(x + 10, y - 20, op)
-        c.drawRightString(x + 90, y - 20, f"{b}")
-        c.line(x + 10, y - 45, x + 100, y - 45)
-    # After drawing all tracing rows
-    c.setFont("Helvetica-Bold", 24)
-    c.setFillColorRGB(0.2, 0.6, 0.2)  # a nice green color
-    c.drawCentredString(width / 2, 40, "🌟 Great job, you did it! 🌟")
+            c.drawRightString(x + 90, y, f"{a}")
+            c.drawString(x + 10, y - 20, op)
+            c.drawRightString(x + 90, y - 20, f"{b}")
+            c.line(x + 10, y - 45, x + 100, y - 45)
+        # After drawing all tracing rows
+        c.setFont("Helvetica-Bold", 24)
+        c.setFillColorRGB(0.2, 0.6, 0.2)  # a nice green color
+        c.drawCentredString(width / 2, 40, "🌟 Great job, you did it! 🌟")
+        c.showPage()
 
     c.save()
 

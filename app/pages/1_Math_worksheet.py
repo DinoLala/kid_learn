@@ -29,6 +29,7 @@ with col1:
     name = st.text_input("Enter your name")
     output_form = st.selectbox("Worksheet form", ['Column', 'Row'])
     operations = st.multiselect("Please select operation", ['+', '-', '×']) or ['+'] #, '÷'
+    worksheet_number = st.number_input('Worksheet pages', min_value=0, max_value=9, value=1)
 
 with col2:
     min_number = st.number_input('Min (0-999)', min_value=0, max_value=999, value=0)
@@ -72,30 +73,35 @@ def generate_math_problems_row_form(input_dict):
         problems.append(f"{a} {op} {b} = _______")
     return problems
 
-def create_worksheet_row_form(problems, input_dict):
+def create_worksheet_row_form(input_dict):
+
     c = canvas.Canvas(input_dict['filename'], pagesize=letter)
     width, height = letter
-    c.setFont("Helvetica-Bold", 16)
-    c.drawCentredString(width / 2, height - 40, input_dict['title'])
-    c.setFont("Helvetica", 12)
-    c.drawString(50, height - 70, f"Date: {datetime.today().strftime('%B %d, %Y')}")
+
 
     margin_left, margin_top = 50, 120
     column_width = (width - 2 * margin_left) / 3
     row_height = 60
     start_y = height - margin_top
+    for _ in range(worksheet_number):
+        problems=generate_math_problems_row_form(input_dict)
+        c.setFont("Helvetica-Bold", 16)
+        c.drawCentredString(width / 2, height - 40, input_dict['title'])
+        c.setFont("Helvetica", 12)
+        c.drawString(50, height - 70, f"Date: {datetime.today().strftime('%B %d, %Y')}")
 
-    for row in range(10):
-        y = start_y - row * row_height
-        for col in range(3):
-            idx = row * 3 + col
-            if idx < len(problems):
-                x = margin_left + col * column_width
-                c.drawString(x, y, problems[idx])
-    # After drawing all tracing rows
-    c.setFont("Helvetica-Bold", 24)
-    c.setFillColorRGB(0.2, 0.6, 0.2)  # a nice green color
-    c.drawCentredString(width / 2, 40, "🌟 Great job, you did it! 🌟")
+        for row in range(10):
+            y = start_y - row * row_height
+            for col in range(3):
+                idx = row * 3 + col
+                if idx < len(problems):
+                    x = margin_left + col * column_width
+                    c.drawString(x, y, problems[idx])
+        # After drawing all tracing rows
+        c.setFont("Helvetica-Bold", 24)
+        c.setFillColorRGB(0.2, 0.6, 0.2)  # a nice green color
+        c.drawCentredString(width / 2, 40, "🌟 Great job, you did it! 🌟")
+        c.showPage()
 
     c.save()
 
@@ -120,7 +126,8 @@ def generate_problems_col_form(input_dict):
         problems.append((a, op, b))
     return problems
 
-def create_math_worksheet_col_form(problems, input_dict):
+def create_math_worksheet_col_form( input_dict):
+    problems=generate_problems_col_form(input_dict)
     c = canvas.Canvas(input_dict['filename'], pagesize=letter)
     width, height = letter
 
@@ -173,11 +180,9 @@ if submited:
     else:
         st.write(f":orange[Hello {name} ! Here is your worksheet to download:]")
         if output_form == 'Row':
-            problems = generate_math_problems_row_form(input_dict)
-            create_worksheet_row_form(problems, input_dict)
+            create_worksheet_row_form( input_dict)
         else:
-            problems = generate_problems_col_form(input_dict)
-            create_math_worksheet_col_form(problems, input_dict)
+            create_math_worksheet_col_form( input_dict)
 
         with open(filename, "rb") as pdf_file:
             st.download_button(

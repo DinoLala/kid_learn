@@ -28,15 +28,20 @@ st.markdown("Create a **printable worksheet** with traceable dotted words – gr
 col1, col2, col3 = st.columns(3)
 with col1:
     child_name = st.text_input("Child's Name (optional):")
-    word_category= st.selectbox("Category", ['Common words', 'Animals', 'Numbers'])
+    word_category= st.selectbox("Category", ['school words', 'Common words', 'Animals', 'Numbers'])
     worksheet_number = st.number_input('Worksheet pages', min_value=0, max_value=9, value=1)
-    if word_category =='Animals':
+    if word_category =='school words':
+        # word_list = st.text_input("input words list from teacher:")
+        file_name="app/data/trace_words_from_school.json"
+    elif word_category =='Animals':
         file_name="app/data/trace_words_animals.json"
     elif word_category=='Numbers':
         file_name="app/data/trace_words_numbers.json"
     else:
         file_name="app/data/trace_words.json"
-   
+
+
+
 # words_input = st.text_area("Enter words (one per line)", placeholder="e.g.\ncat\ndog\ntree")
 
 # st.write(file_name)
@@ -46,6 +51,19 @@ def load_words():
             return json.load(f)
       
 words_all = load_words()
+
+
+if word_category =='school words':
+    word_list = st.text_input("input words list from teacher:") 
+    word_list1= word_list.split(',')
+    for word in word_list1:
+        if word not in words_all:   # avoid duplicates
+            words_all.append(word)
+    print(words_all)
+    with open(file_name, "w") as f:
+        json.dump(words_all, f, indent=2)
+
+
 # st.write(words_all)
 
 # Pick 8 random words without repetition

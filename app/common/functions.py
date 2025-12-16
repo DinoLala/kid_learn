@@ -51,11 +51,15 @@ def create_worksheet_row_form(input_dict,worksheet_number):
     start_y = height - margin_top
     for _ in range(worksheet_number):
         problems=generate_math_problems_row_form(input_dict)
-        c.setFont("Helvetica-Bold", 16)
-        c.drawCentredString(width / 2, height - 40, input_dict['title'])
+                    # Title
+        title = input_dict['title']
+        # c.setFont(font_name, 48)
+        c.setFont("Helvetica-Bold", 24)
+        c.setFillColorRGB(0.2, 0.6, 0.2)
+        c.drawCentredString(width / 2, height - 40, title)
         c.setFont("Helvetica", 12)
         c.drawString(50, height - 70, f"Date: {datetime.today().strftime('%B %d, %Y')}")
-
+        c.setFillColorRGB(0,0,0)
         for row in range(10):
             y = start_y - row * row_height
             for col in range(3):
@@ -100,11 +104,15 @@ def create_math_worksheet_col_form( input_dict,worksheet_number):
     for _ in range(worksheet_number):
         problems=generate_problems_col_form(input_dict)
 
-        c.setFont("Helvetica-Bold", 16)
-        c.drawCentredString(width / 2, height - 40, input_dict['title'])
+        title = input_dict['title']
+        c.setFillColorRGB(0.2, 0.6, 0.2)
+        # c.setFont(font_name, 48)
+        c.setFont("Helvetica-Bold", 24)
+        # c.drawCentredString(width / 2, y, title)
+        c.drawCentredString(width / 2, height - 40, title)
         c.setFont("Helvetica", 12)
         c.drawString(50, height - 70, f"Date: {datetime.today().strftime('%B %d, %Y')}")
-
+        c.setFillColorRGB(0, 0, 0)
         margin_x, margin_top = 30, 120
         col_width = (width - 2 * margin_x) / 4
         row_height = 125

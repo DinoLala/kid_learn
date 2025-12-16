@@ -30,7 +30,7 @@ with col1:
     name = st.text_input("Enter your name")
     output_form = st.selectbox("Worksheet form", ['Column', 'Row'])
     operations = st.multiselect("Please select operation", ['+', '-', '×']) or ['+'] #, '÷'
-    worksheet_number = st.number_input('Worksheet pages', min_value=0, max_value=9, value=1)
+    worksheet_number = st.number_input('Worksheet pages', min_value=0, max_value=50, value=1)
 
 with col2:
     min_number = st.number_input('Min (0-999)', min_value=0, max_value=999, value=0)

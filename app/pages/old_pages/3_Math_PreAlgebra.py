@@ -21,7 +21,7 @@ Practice solving **one-variable equations** like `x + 3 = 8` with this printable
 col1, col2, col3 = st.columns(3)
 with col1:
     name = st.text_input("Student's Name (optional)")
-    page_count = st.number_input("Number of pages", min_value=1, max_value=10, value=1)
+    page_count = st.number_input("Number of pages", min_value=1, max_value=50, value=1)
 with col2:
     min_val = st.number_input("Min value", min_value=-100, max_value=100, value=1)
     max_val = st.number_input("Max value", min_value=-100, max_value=100, value=20)

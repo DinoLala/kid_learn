@@ -29,7 +29,7 @@ col1, col2, col3 = st.columns(3)
 with col1:
     child_name = st.text_input("Child's Name (optional):")
     word_category= st.selectbox("Category", ['school words', 'Common words', 'Animals', 'Numbers'])
-    worksheet_number = st.number_input('Worksheet pages', min_value=0, max_value=9, value=1)
+    worksheet_number = st.number_input('Worksheet pages', min_value=0, max_value=50, value=1)
     if word_category =='school words':
         # word_list = st.text_input("input words list from teacher:")
         file_name="app/data/trace_words_from_school.json"

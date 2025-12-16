@@ -56,7 +56,7 @@ def load_words():
             return json.load(f)
       
 words_all = load_words()
-
+word_list1=[]
 
 if word_category =='school words':
      

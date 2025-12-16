@@ -6,6 +6,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib.units import inch
 from reportlab.lib import colors
 from io import BytesIO
+from datetime import datetime
 import os
 import math
 import json
@@ -25,12 +26,12 @@ Ready, set, trace! 🌟📄🖍️
 st.markdown("Create a **printable worksheet** with traceable dotted words – great for early writers!")
 
 # Input
-col1, col2, col3 = st.columns(3)
+col1, col2= st.columns(2)
 with col1:
     child_name = st.text_input("Child's Name (optional):")
-    word_category= st.selectbox("Category", ['school words', 'Common words', 'Animals', 'Numbers'])
+    word_category= st.selectbox("Category", ['School words', 'Common words', 'Animals', 'Numbers'])
     worksheet_number = st.number_input('Worksheet pages', min_value=0, max_value=50, value=1)
-    if word_category =='school words':
+    if word_category =='School words':
         # word_list = st.text_input("input words list from teacher:")
         file_name="app/data/trace_words_from_school.json"
     elif word_category =='Animals':
@@ -39,6 +40,10 @@ with col1:
         file_name="app/data/trace_words_numbers.json"
     else:
         file_name="app/data/trace_words.json"
+    word_list = st.text_input("input words list from teacher:(optional)")
+with col2:
+    st.write('Sample output')
+    st.image('./app/data/trace.png')
 
 
 
@@ -54,7 +59,7 @@ words_all = load_words()
 
 
 if word_category =='school words':
-    word_list = st.text_input("input words list from teacher:") 
+     
     word_list1= word_list.split(',')
     for word in word_list1:
         if word not in words_all:   # avoid duplicates
@@ -101,15 +106,24 @@ if st.button("Generate Tracing Worksheet"):
         guideline_width = width - 2 * margin
 
         for _ in range(worksheet_number):
-            words_to_trace = random.sample(words_all, 6)
-            words = words_to_trace
+            if word_list1 !=[]:
+                words_to_trace = random.sample(word_list1, 6)
+            else:
+                words_to_trace = random.sample(words_all, 6)
+
+            words = [ c.replace("'",'') for c in words_to_trace]
+            words = [ c for c in words if c != '']
 
             y = height - margin
 
             # Title
             title = f"{child_name}'s Tracing Worksheet" if child_name else "Word Tracing Worksheet"
-            c.setFont(font_name, 48)
+            c.setFillColorRGB(0.2, 0.6, 0.2)
+            # c.setFont(font_name, 48)
+            c.setFont("Helvetica-Bold", 24)
+            c.setFillColorRGB(1, 0.6, 0.8)
             c.drawCentredString(width / 2, y, title)
+
 
             # Draw flowers under the title
             flower_y = y - 40
@@ -128,6 +142,8 @@ if st.button("Generate Tracing Worksheet"):
 
                 c.setFillColorRGB(1, 1, 0)
                 c.circle(center_x, flower_y, flower_radius, fill=1)
+
+
 
             c.setFillColorRGB(0, 0, 0)
             y -= 30

@@ -84,6 +84,7 @@ word_list1=[]
 if word_category =='School words':
      
     word_list1= word_list.split(',')
+    word_list1=[ c for c in word_list1 if c !='' ]
     for word in word_list1:
         if word not in words_all and len(word) > 1:   # avoid duplicates
             words_all.append(word)
@@ -121,6 +122,7 @@ if st.button("Generate Tracing Worksheet"):
 
         for _ in range(worksheet_number):
             if word_list1 !=[]:
+                print('-----------------------------',word_list1)
                 words_to_trace = random.sample(word_list1, 6)
             else:
                 words_to_trace = random.sample(words_all, 6)

@@ -10,7 +10,7 @@ Welcome to our playful corner of learning!
 Here, math becomes an adventure full of puzzles, smiles, and brainy fun. 🧠✨  
 
 Let's count, add, subtract — and most of all, enjoy every step of the journey.  
-Perfect for curious little minds in **K–2**! 📚👧🧒
+Perfect for curious little minds in **K–3**! 📚👧🧒
 """, unsafe_allow_html=True)
 
 # ---------- Load Brain Teasers ----------

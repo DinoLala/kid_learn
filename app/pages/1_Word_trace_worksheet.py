@@ -11,20 +11,42 @@ import os
 import math
 import json
 import random
+st.set_page_config(page_title="Word Tracing Worksheet", layout="centered")
+col1, col2 = st.columns([3, 2])
 
 # Page setup
-st.set_page_config(page_title="Word Tracing Worksheet", layout="centered")
-st.markdown("""
-<h3 style='color: orange;'>✏️ Word Tracing Worksheet Generator</h3>
+with col1:
 
-Welcome to a fun and easy way to help little learners practice writing! 💖  
-Choose from exciting word categories like **Animals**, **Common words**, or **Numbers**, and we’ll create a magical tracing worksheet just for you.  
+    st.markdown("""
+    <h3 style='color: orange;'>✏️ Word Tracing Worksheet Generator</h3>
 
-Perfect for preschoolers and early learners to build confidence, one dotted letter at a time!  
-Ready, set, trace! 🌟📄🖍️
-""", unsafe_allow_html=True)
-st.markdown("Create a **printable worksheet** with traceable dotted words – great for early writers!")
+    Welcome to a fun and easy way to help little learners practice writing! 💖  
+    - Choose from exciting word categories like **Animals**, **Common words**, or **Numbers**, and we’ll create a magical tracing worksheet just for you.  
 
+    - Perfect for preschoolers and early learners to build confidence, one dotted letter at a time!  
+    Ready, set, trace! 🌟📄🖍️
+    """, unsafe_allow_html=True)
+    st.markdown("- Create a ** 🖨️printable worksheet** with traceable dotted words – great for early writers!")
+with col2:
+    # st.write('Sample output')
+    st.image('./app/data/trace.png')
+
+
+
+st.html(
+    """
+    <style>
+    hr.thick-line {
+        border: none;
+        height: 3px; /* Adjust the height for thickness */
+        background-color: #FFA500   ; /* Adjust the color (e.g., black or hex code) */
+        margin-top: 20px; /* Adjust top margin for spacing */
+        margin-bottom: 20px; /* Adjust bottom margin for spacing */
+    }
+    </style>
+    <hr class="thick-line" />
+    """
+)
 # Input
 col1, col2= st.columns(2)
 with col1:
@@ -40,16 +62,16 @@ with col1:
         file_name="app/data/trace_words_numbers.json"
     else:
         file_name="app/data/trace_words.json"
-    word_list = st.text_input("input words list from teacher:(optional)")
 with col2:
-    st.write('Sample output')
-    st.image('./app/data/trace.png')
+    st.write('input words list from teacher:(optional))' )
+    # st.write('School words - category only')
+    word_list = st.text_input("Teacher word list (School words - category only) ")
+
+# with col2:
+#     st.write('Sample output')
+#     st.image('./app/data/trace.png')
 
 
-
-# words_input = st.text_area("Enter words (one per line)", placeholder="e.g.\ncat\ndog\ntree")
-
-# st.write(file_name)
 # @st.cache_data
 def load_words():
         with open(file_name, "r") as f:   
@@ -68,15 +90,6 @@ if word_category =='school words':
     with open(file_name, "w") as f:
         json.dump(words_all, f, indent=2)
 
-
-# st.write(words_all)
-
-# Pick 8 random words without repetition
-
-# st.write(words_to_trace)
-
-
-# Font setup (you must provide a dotted tracing font)
 FONT_PATH = "app/font/KGPrimaryDots.ttf"  # Change if you use a different path or font
 if os.path.exists(FONT_PATH):
     pdfmetrics.registerFont(TTFont("Dotted", FONT_PATH))
@@ -117,7 +130,7 @@ if st.button("Generate Tracing Worksheet"):
             y = height - margin
 
             # Title
-            title = f"{child_name}'s Tracing Worksheet" if child_name else "Word Tracing Worksheet"
+            title = f"{child_name}'s Tracing Worksheet" if child_name else "Tracing Worksheet"
             c.setFillColorRGB(0.2, 0.6, 0.2)
             # c.setFont(font_name, 48)
             c.setFont("Helvetica-Bold", 24)
@@ -190,7 +203,7 @@ if st.button("Generate Tracing Worksheet"):
 
         st.success("✅ Worksheet ready!")
         st.download_button(
-            label="📥 Download PDF",
+            label="📥 Download Worksheet PDF",
             data=buffer,
             file_name="tracing_worksheet.pdf",
             mime="application/pdf"

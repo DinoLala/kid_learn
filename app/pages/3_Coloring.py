@@ -17,7 +17,7 @@ col1, col2 = st.columns([3, 2])
 with col1:
     st.markdown("""
     <h3 style='color: #ff66a3;'>🎨 Welcome to the Coloring Page Creator! 🖍️</h3>
-    Create adorable and printable coloring pages for <b>K–3 kids</b>.
+    Create adorable and printable coloring pages for <b>kids</b>.
 
     - 🐾 Browse cute animals and fun scenes  
     - 🎨 Let kids color, relax, and be creative  

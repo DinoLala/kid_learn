@@ -3,16 +3,23 @@ import json
 import random
 
 # ---- Title & Welcome ----
-st.markdown("""
-<h2 style='color: orange;'>🎉 Having Fun Learning with Lam! 🧡</h2>
+col1, col2 = st.columns([5, 2])
 
-Welcome to our playful corner of learning!  
-Here, math becomes an adventure full of puzzles, smiles, and brainy fun. 🧠✨  
+# Page setup
+# st.set_page_config(page_title="Word Tracing Worksheet",layout="wide")
+with col1:
+    st.markdown("""
+    <h2 style='color: orange;'>🎉 Having Fun Learning with Lam! 🧡</h2>
 
-Let's count, add, subtract — and most of all, enjoy every step of the journey.  
-Perfect for curious little minds in **K–3**! 📚👧🧒
-""", unsafe_allow_html=True)
+    Welcome to our playful corner of learning!  
+    Here, math becomes an adventure full of puzzles, smiles, and brainy fun. 🧠✨  
 
+    Let's count, add, subtract — and most of all, enjoy every step of the journey.  
+    Perfect for curious little minds in **K–3**! 📚👧🧒
+    """, unsafe_allow_html=True)
+with col2:
+    # st.write('Sample output')
+    st.image('./app/data/cute_girl.png')
 # ---------- Load Brain Teasers ----------
 @st.cache_data
 def load_brain_questions():

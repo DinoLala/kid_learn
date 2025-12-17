@@ -81,11 +81,11 @@ def load_words():
 words_all = load_words()
 word_list1=[]
 
-if word_category =='school words':
+if word_category =='School words':
      
     word_list1= word_list.split(',')
     for word in word_list1:
-        if word not in words_all:   # avoid duplicates
+        if word not in words_all and len(word) > 1:   # avoid duplicates
             words_all.append(word)
     print(words_all)
     with open(file_name, "w") as f:

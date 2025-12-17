@@ -11,7 +11,8 @@ import os
 import math
 import json
 import random
-st.set_page_config(page_title="Word Tracing Worksheet", layout="centered")
+# st.set_page_config(page_title="Word Tracing Worksheet", layout="centered")
+st.set_page_config(page_title="Word Tracing Worksheet",layout="wide")
 col1, col2 = st.columns([3, 2])
 
 # Page setup
@@ -29,7 +30,7 @@ with col1:
     st.markdown("- Create a ** 🖨️printable worksheet** with traceable dotted words – great for early writers!")
 with col2:
     # st.write('Sample output')
-    st.image('./app/data/trace.png')
+    st.image('./app/data/trace1.png')
 
 
 

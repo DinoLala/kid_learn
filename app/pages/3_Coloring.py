@@ -29,7 +29,7 @@ with col1:
 with col2:
     # Change this to any image you want for the intro
     st.image("app/data/color_pic/Animals/lion.png")
-    st.write(' Note: All images are AI genereated.')
+    st.write(' Note: All images are AI generated.')
 
 # -----------------------------
 # Load all images

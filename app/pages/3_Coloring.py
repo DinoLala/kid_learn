@@ -28,14 +28,21 @@ with col1:
 
 with col2:
     # Change this to any image you want for the intro
-    st.image("app/data/color_pic/lion.png")
+    st.image("app/data/color_pic/Animals/lion.png")
     st.write(' Note: All images are AI genereated.')
 
 # -----------------------------
 # Load all images
 # -----------------------------
-DATA_FOLDER = "app/data/color_pic"
 
+with col1:
+    categories=['Animals','Vehicles','Princess','Landscapes']
+    selected_category = st.selectbox(
+    "📂 Choose a category:",
+    categories,
+    index=0
+    )
+DATA_FOLDER = "app/data/color_pic/"+selected_category
 animal_files = {
     f.replace(os.path.splitext(f)[1], ""): os.path.join(DATA_FOLDER, f)
     for f in os.listdir(DATA_FOLDER)
@@ -117,6 +124,8 @@ with st.container():
     )
 
     left, center, right = st.columns([1, 2, 1])
+
+
     with center:
         st.image(img_path, width=420)
         
@@ -164,7 +173,11 @@ with st.container():
             name_y = y - 90
             c.setFont("Helvetica", 14)
             c.drawString(margin, name_y, "Name:")
+            
             c.line(margin + 45, name_y - 2, width - margin, name_y - 2)
+            name_y = y - 140
+            c.drawString(margin, name_y, "What do you see:")
+            c.line(margin + 120, name_y - 2, width - margin, name_y - 2)
 
             # Image placement
             img_reader = ImageReader(img_path)
